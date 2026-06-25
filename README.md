@@ -1,26 +1,52 @@
-cd /home/ec2-user/devops-cicd-project
-
-cat > README.md << 'EOF'
 # DevOps CI/CD Project
 
-## Technologies Used
+## Project Overview
 
-- Linux
+This project demonstrates a complete DevOps workflow using:
+
 - Git & GitHub
 - Docker
 - Jenkins
-- Kubernetes
+- Kubernetes (K3s)
 - AWS EC2
 
-## Project Workflow
+## Architecture
 
-GitHub -> Jenkins -> Docker -> Kubernetes
+```text
+GitHub
+   ↓
+Jenkins
+   ↓
+Docker Build
+   ↓
+Docker Image
+   ↓
+Kubernetes (K3s)
+   ↓
+Service
+   ↓
+Ingress
+   ↓
+Application
 
-## Application
-
-Simple Flask Application deployed using Docker and Kubernetes.
-
-## Author
-
-Gaurav Narkhede
-EOF
+Project Structure
+devops-cicd-project/
+├── app.py
+├── requirements.txt
+├── Dockerfile
+├── Jenkinsfile
+├── README.md
+│
+├── kubernetes/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── ingress.yaml
+│   ├── configmap.yaml
+│   └── secret.yaml
+│
+├── monitoring/
+│   └── prometheus.yml
+│
+└── terraform/
+    ├── provider.tf
+    └── ec2.tf
