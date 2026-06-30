@@ -1,7 +1,11 @@
-output "instance_id" {
-  value = aws_instance.devops_server.id
+output "cluster_name" {
+  value = module.eks.cluster_name
 }
 
-output "public_ip" {
-  value = aws_instance.devops_server.public_ip
+output "cluster_endpoint" {
+  value = module.eks.cluster_endpoint
+}
+
+output "ecr_url" {
+  value = aws_ecr_repository.flask.repository_url
 }
