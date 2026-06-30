@@ -11,7 +11,7 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('Login to Amazon ECR') {
+        stage('Login to ECR') {
             steps {
                 sh '''
                 aws ecr get-login-password --region $AWS_REGION | \
@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push Image to ECR') {
             steps {
                 sh '''
                 docker push $IMAGE:$BUILD_NUMBER
@@ -47,11 +47,7 @@ pipeline {
 
     post {
         success {
-            echo 'Docker image pushed successfully to Amazon ECR.'
-        }
-
-        failure {
-            echo 'Pipeline failed.'
+            echo "Image pushed successfully to Amazon ECR."
         }
     }
 }
